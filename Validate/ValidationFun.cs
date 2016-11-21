@@ -111,7 +111,18 @@
                 return false;
             }
         }
-
+        public static bool IsDate(string strDate)
+        {
+            try
+            {
+                DateTime.Parse(strDate);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public static bool IsEmail(string email)
         {
             if (IsNullOrEmpty(email))
@@ -122,6 +133,28 @@
             string pattern = @"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$";
             return IsMatch(email, pattern);
         }
+
+        public static bool IsValidPassword(string password)
+            {
+                try
+                {
+                    return Regex.IsMatch(password,
+                                    @"[-\da-zA-Z`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]*(" +
+                                    @"(\d+[a-zA-Z]+[-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+)" +
+                                    @"|(\d+[-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+[a-zA-Z]+)" +
+                                    @"|([a-zA-Z]+\d+[-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+)" +
+                                    @"|([a-zA-Z]+[-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+\d+)" +
+                                    @"|([-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+\d+[a-zA-Z]+)" +
+                                    @"|([-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+[a-zA-Z]+\d+))" +
+                                    @"[-\da-zA-Z`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]*",
+                            RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                }
+                catch (RegexMatchTimeoutException)
+                {
+                    return false;
+                }
+        
+            }
 
         public static bool IsHasCHZN(string inputData)
         {
@@ -284,6 +317,32 @@
             {
                 return false;
             }
+        }
+
+        //验证电话号码的主要代码如下：
+        public bool IsTelephone(stringstr_telephone)
+        {
+            returnSystem.Text.RegularExpressions.Regex.IsMatch(str_telephone,@"^(\d{3,4}-)?\d{6,8}$");
+        }
+        //验证手机号码的主要代码如下：
+        public bool IsHandset(string str_handset)
+        {
+            returnSystem.Text.RegularExpressions.Regex.IsMatch(str_handset,@"^[1]+[3,8]+\d{9}");
+        }
+        //验证身份证号的主要代码如下：
+        public bool IsIDcard(stringstr_idcard)
+        {
+            returnSystem.Text.RegularExpressions.Regex.IsMatch(str_idcard,@"(^\d{18}$)|(^\d{15}$)");
+        }
+        //验证输入为数字的主要代码如下：
+        public bool IsNumber(stringstr_number)
+        {
+        returnSystem.Text.RegularExpressions.Regex.IsMatch(str_number,@"^[0-9]*$");
+        }
+        //验证邮编的主要代码如下：
+        public boolIsPostalcode(string str_postalcode)
+        {
+            returnSystem.Text.RegularExpressions.Regex.IsMatch(str_postalcode,@"^\d{6}$");
         }
     }
 }
