@@ -1,4 +1,4 @@
-﻿namespace MyCompany.PeiXun.Tools
+﻿namespace ADmgr.Helper
 {
     using System;
     using System.Text;
@@ -133,28 +133,21 @@
             string pattern = @"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$";
             return IsMatch(email, pattern);
         }
-
         public static bool IsValidPassword(string password)
+        {
+            if (IsNullOrEmpty(password))
             {
-                try
-                {
-                    return Regex.IsMatch(password,
-                                    @"[-\da-zA-Z`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]*(" +
-                                    @"(\d+[a-zA-Z]+[-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+)" +
-                                    @"|(\d+[-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+[a-zA-Z]+)" +
-                                    @"|([a-zA-Z]+\d+[-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+)" +
-                                    @"|([a-zA-Z]+[-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+\d+)" +
-                                    @"|([-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+\d+[a-zA-Z]+)" +
-                                    @"|([-`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]+[a-zA-Z]+\d+))" +
-                                    @"[-\da-zA-Z`=\\\[\];',./~!@#$%^&*()_+|{}:<>?]*",
-                            RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-                }
-                catch (RegexMatchTimeoutException)
-                {
-                    return false;
-                }
-        
+                return true;
             }
+            password = password.Trim();
+            //如果是6~20位英文字母、数字的话，可以这样写:
+            //string pattern = @"^[0-9a-zA-z]{6,20}$";
+            //如果特殊字符只有下划线的话，可以用下面的字符串:
+            //string pattern = @"^[0-9a-zA-z_]{6,20}$";
+            //string pattern = @"^[0-9a-zA-z_\(\)]{6,20}$";
+            string pattern = @"^[0-9a-zA-Z`~!@#$%\^&*()_+-={}|\[\]:"";'<>?,.]{6,20}$";
+            return IsMatch(password, pattern);
+        }
 
         public static bool IsHasCHZN(string inputData)
         {
@@ -247,7 +240,7 @@
                 return true;
             }
             number = number.Trim();
-            string pattern = "^[1-9]+[0-9]*[.]?[0-9]*$";
+            string pattern = @"^[0-9]\d*$";
             return IsMatch(number, pattern);
         }
 
@@ -272,22 +265,22 @@
             {
                 return false;
             }
-            return Regex.IsMatch(url, @"^http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?$");
+            return Regex.IsMatch(url, @"^(http|https|ftp)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&$%\$#\=~])*$");
         }
 
         public static bool IsValidInput(string str)
         {
-            bool flag = false;
+            bool flag = true;
             if (!string.IsNullOrEmpty(str))
             {
                 string strContent = "@@,+,',--,%,^,&,?,(,),<,>,[,],{,},/,\\,;,:,\",\"\"";
-                string[] strArray = StringFun.SplitString(strContent, ",");
+                string[] strArray = strContent.Split(',');
                 string str3 = str;
                 for (int i = 0; i < strArray.Length; i++)
                 {
                     if (str3.IndexOf(strArray[i]) >= 0)
                     {
-                        flag = true;
+                        flag = false;
                     }
                 }
             }
@@ -318,32 +311,32 @@
                 return false;
             }
         }
-
         //验证电话号码的主要代码如下：
-        public bool IsTelephone(stringstr_telephone)
+        public static bool IsTelephone(string str_telephone)
         {
-            returnSystem.Text.RegularExpressions.Regex.IsMatch(str_telephone,@"^(\d{3,4}-)?\d{6,8}$");
+            return System.Text.RegularExpressions.Regex.IsMatch(str_telephone, @"^(\d{3,4}-)?\d{6,8}$");
         }
         //验证手机号码的主要代码如下：
-        public bool IsHandset(string str_handset)
+        public static bool IsHandset(string str_handset)
         {
-            returnSystem.Text.RegularExpressions.Regex.IsMatch(str_handset,@"^[1]+[3,8]+\d{9}");
+            return System.Text.RegularExpressions.Regex.IsMatch(str_handset, @"^[1]+[3,8]+\d{9}");
         }
         //验证身份证号的主要代码如下：
-        public bool IsIDcard(stringstr_idcard)
+        public static bool IsIDcard(string str_idcard)
         {
-            returnSystem.Text.RegularExpressions.Regex.IsMatch(str_idcard,@"(^\d{18}$)|(^\d{15}$)");
+            return System.Text.RegularExpressions.Regex.IsMatch(str_idcard, @"(^\d{18}$)|(^\d{15}$)");
         }
         //验证输入为数字的主要代码如下：
-        public bool IsNumber(stringstr_number)
+        public static bool IsSimpleNumber(string str_number)
         {
-        returnSystem.Text.RegularExpressions.Regex.IsMatch(str_number,@"^[0-9]*$");
+            return System.Text.RegularExpressions.Regex.IsMatch(str_number, @"^[0-9]*$");
         }
         //验证邮编的主要代码如下：
-        public boolIsPostalcode(string str_postalcode)
+        public static bool IsPostalcode(string str_postalcode)
         {
-            returnSystem.Text.RegularExpressions.Regex.IsMatch(str_postalcode,@"^\d{6}$");
+            return System.Text.RegularExpressions.Regex.IsMatch(str_postalcode, @"^\d{6}$");
         }
+
     }
 }
 
