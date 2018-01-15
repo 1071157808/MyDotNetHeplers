@@ -1,0 +1,21 @@
+//DropDownListFor级联
+@Html.DropDownListFor(
+    model => model[i].UIViewModel.Dept,
+    new List<SelectListItem> {　　
+        new SelectListItem()
+{
+    Text = "请选择",
+            Value = (null as bool?).ToString() }},
+            "--请选择部门类型--",
+            new { @class = "dropdown", id = "depts", onchange = "ChangeTitles()" }
+            )
+
+
+//DropDownListFor
+<td> @Html.DropDownListFor(
+    model => model[i].AdDirectoryViewModel.AccountType,
+    ViewData["accounttypes"] as List<SelectListItem>,
+    "--请选择账户类型--",
+    new {@class = "dropdown", onchange = "ChangeCompanies()"}
+    )
+</td>

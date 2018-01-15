@@ -1,0 +1,7 @@
+E:\AccessRateDemo\Demo\ConsoleApp\bin\Debug\ConsoleApp.exe.config
+E:\AccessRateDemo\Demo\ConsoleApp\bin\Debug\ConsoleApp.exe
+E:\AccessRateDemo\Demo\ConsoleApp\bin\Debug\ConsoleApp.pdb
+E:\AccessRateDemo\Demo\ConsoleApp\obj\Debug\ConsoleApp.csprojResolveAssemblyReference.cache
+E:\AccessRateDemo\Demo\ConsoleApp\obj\Debug\ConsoleApp.csproj.CoreCompileInputs.cache
+E:\AccessRateDemo\Demo\ConsoleApp\obj\Debug\ConsoleApp.exe
+E:\AccessRateDemo\Demo\ConsoleApp\obj\Debug\ConsoleApp.pdb

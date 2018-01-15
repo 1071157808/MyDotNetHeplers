@@ -1,0 +1,55 @@
+@Html.RadioButton("Active","true") yes
+@Html.RadioButton("Active",false,true)
+@Html.RadioButton();    // 显示的是一个input RadioButton控件
+@Html.Button();    // 显示的是一个input Button控件
+@Html.DropDownList();     //显示的是一个input DropDownList控件
+@Html.Hidden();     //显示的是一个input Hidden控件
+@Html.ValidationMessage();     //显示的是一个input ValidationMessage控件
+@Html.BeginForm("ActionName","ControllerName",FormMethod.method);     显//示的是一个input BeginForm控件，优化内存的控件，避免内存泄漏
+@Html.DisplayFor(modelitem=>item.content);   //显示的列的内容  
+@Html.DisplayNameFor(model=>model.Title);  //显示的是列名
+@Html.Raw(ViewBag.ss);//直接使用@ViewBag.ss来显示只能显示源代码，使用@Html.Raw可以讲ViewBag中的html代码解析为页面
+@Html.EditorFor(model=>model.Title,xxxx)
+@Html.ValidationMessageFor(model=>model.Title,xxxx)
+@Html.LabelFor(model=>model.content)
+@Html.TextArea("area",null,new{ id="ta"}); // area是名字，null是传入的字符串，new下的是属性
+@Html.CheckBoxFor(modelItem=>item.Checkd)    //这个真强，一步写出带有返回值的代码，而且可以在control中直接使用，很好很强大
+@Url.Content//可以将ViewBage传回来的~符号给删掉，清理出一个干净的url相对路径给src用 <img src="@Url.Content(ViewBag.ImageUrl)" alt="Alternate Text" />
+//RenderPage用法
+@RenderPage("~/Views/Shared/_Header.cshtml")
+//正常解析含有html的代码需要
+@Html.Raw(ViewBag.ss);
+//直接使用@ViewBag.ss来显示只能显示源代码，像这样
+@ViewBag.ss
+//使用Scripts.Render()引入脚本
+@sectionScrits
+{ @Scripts.Render("~/bundles/jquery") }
+
+ModelState.AddModelError("Title","What a terrible name!");
+
+
+//在模板页layout中这样写，就可以包含前台的中定义的@Section xxx代码
+@RenderSection("name", required :false)
+@RenderSection("scri", required :false)
+@section name// 注意section是小写的
+{
+ <style>.... </style>
+}
+
+js中的@
+//razor中的js无法使用@符号
+//要么使用\\u0440来代替，要么使用@@来代替，用前者解析器不会报错
+
+
+razor中的@
+@{
+     string s = "super xiao lizi";
+@s; // 里面的这个@代表着在页面上输出这个s // 我记得实际是给了Response.write
+}
+
+~的用法
+//以前需要这样写
+<script src = "@Url.Content("~/Script/site.js")"></script>
+//现在仅需要这样写就行了，因为Razor可以正常的解析 ~/
+<script src = "~/Script/site.js" ></ script >
+

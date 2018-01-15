@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>AccessCoreDemo</title>
+</head>
+<script src="Scripts/jquery-1.10.2.min.js"></script>
+<script src="Scripts/jquery.signalR-2.1.2.min.js"></script>
+<script src="/signalr/hubs"></script>
+<style>
+    .c {
+        width: 200px;
+        height: 300px;
+        border: solid;
+        display: inline-block;
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+
+   
+</style>
+<body>
+    <input type="button" id="btn" value="访问开始" onclick="Start()" />
+    <br />
+    <div class="c">
+        容器1:
+        <div id="c1">
+            <div>
+            </div>
+        </div>
+    </div>
+    <div class="c">
+        容器2:
+        <div id="c2">
+            <div>
+            </div>
+        </div>
+    </div>
+    <div>
+        容器3:
+        <div id="c3">
+            <div>
+            </div>
+        </div>
+    </div>
+    <div>
+        容器4:
+        <div id="c4">
+            <div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $("#btn").hide();
+    var HubHubHub = $.connection.socketHub;
+
+    $.connection.hub.start().done(function () {
+        $("#btn").show();
+    })
+
+
+    function Start() {
+        HubHubHub.server.start();
+    }
+    function Fill(id, hubModel) {
+        for (var i = 0; i < hubModel.length; i++) {
+            if ($("#" + hubModel[i].UserId).length == 0) {
+                $("#" + id).append("<div id=" + hubModel[i].UserId + ">IP:" + hubModel[i].UserId + "   当前数量：" + hubModel[i].Count + "</div>");
+            }
+            else {
+                $("#" + hubModel[i].UserId).html("IP:" + hubModel[i].UserId + "   当前数量：" + hubModel[i].Count);
+            }
+        }
+    }
+
+    HubHubHub.client.update1 = function (hubModel) {
+        Fill("c1", hubModel);
+    }
+    HubHubHub.client.update2 = function (hubModel) {
+        Fill("c2", hubModel);
+    }
+    HubHubHub.client.update3 = function (hubModel) {
+        Fill("c3", hubModel);
+    }
+    HubHubHub.client.update4 = function (hubModel) {
+        Fill("c4", hubModel);
+    }
+
+    HubHubHub.client.clear1 = function () {
+        $("#c1").html("");
+    }
+    HubHubHub.client.clear2 = function () {
+        $("#c2").html("");
+    }
+    HubHubHub.client.clear3 = function () {
+        $("#c3").html("");
+    }
+    HubHubHub.client.clear4 = function () {
+        $("#c4").html("");
+    }
+
+
+</script>

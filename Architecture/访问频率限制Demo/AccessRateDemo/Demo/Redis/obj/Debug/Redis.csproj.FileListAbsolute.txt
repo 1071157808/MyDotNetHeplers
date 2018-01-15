@@ -1,0 +1,9 @@
+E:\AccessRateDemo\Demo\Redis\bin\Debug\Redis.exe.config
+E:\AccessRateDemo\Demo\Redis\bin\Debug\Redis.exe
+E:\AccessRateDemo\Demo\Redis\bin\Debug\Redis.pdb
+E:\AccessRateDemo\Demo\Redis\bin\Debug\StackExchange.Redis.dll
+E:\AccessRateDemo\Demo\Redis\bin\Debug\StackExchange.Redis.xml
+E:\AccessRateDemo\Demo\Redis\obj\Debug\Redis.csprojResolveAssemblyReference.cache
+E:\AccessRateDemo\Demo\Redis\obj\Debug\Redis.csproj.CoreCompileInputs.cache
+E:\AccessRateDemo\Demo\Redis\obj\Debug\Redis.exe
+E:\AccessRateDemo\Demo\Redis\obj\Debug\Redis.pdb
