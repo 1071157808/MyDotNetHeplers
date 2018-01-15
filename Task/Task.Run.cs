@@ -5,9 +5,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-
-
-
 // Task.Run Task.Run则是等线程池空闲后在执行
 namespace ConsoleApplication7 {
     class Program {
@@ -34,6 +31,51 @@ namespace ConsoleApplication7 {
             }
             Thread.Sleep (2000);
 
+        }
+    }
+}
+
+// -------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace AwaitDemo02 {
+    class Program {
+        static void Main (string[] args) {
+            var str = MyHello ().Result;
+            Console.WriteLine (str);
+            Console.Read ();
+        }
+        static async Task<string> MyHello () {
+            string x = await Task.Run (() => {
+                Console.WriteLine ("i'm middle");
+                return "i'm ok";
+            });
+            return "game over" + " " + x;
+        }
+    }
+}
+//-------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace AwaitDemo01 {
+    class Program {
+        static void Main (string[] args) {
+            var info = GetString ().Result;
+            Console.WriteLine (info);
+        }
+        static async Task<string> GetString () {
+            FileStream fs = new FileStream (Environment.CurrentDirectory + "//1.txt", FileMode.Open);
+            var bytes = new byte[fs.Length];
+            var len = await fs.ReadAsync (bytes, 0, bytes.Length);
+            var str = Encoding.Default.GetString (bytes);
+            return str;
         }
     }
 }
