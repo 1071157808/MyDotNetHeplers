@@ -1,4 +1,4 @@
-Public TouristAttraction GetTouristAttraction(int id)
+PMapToStoredProceduresublic TouristAttraction GetTouristAttraction(int id)
 {
     TouristAttraction touristattraction = db.TouristAttractions.Find(id);
 }
