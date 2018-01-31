@@ -12,7 +12,7 @@ namespace _01.ThreadStartJoin {
                 Console.WriteLine ("子线程执行结束");
             }));
             t.Start ();
-            t.Join (); //在此处等待子线程执行完
+            t.Join (); //在此处等待子线程执行完   join的功能就是相当于task.wait();
             Console.WriteLine ("主线程执行结束");
             Console.ReadKey ();
         }
