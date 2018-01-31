@@ -1,3 +1,11 @@
+这个特性提升了将近一倍的查询性能
+SQL Server内存优化表支持
+内存优化表是SQL Server的一个特性，它将整个表驻留在内存中，
+在磁盘上保留着对表的副本，主要是用于持久化，在数据库恢复时（比如重启）
+在内存优化表中的数据从磁盘上仅仅只是进行读取。比如对Blog表进行内存优化设置，
+将实体映射到内存优化中的表，当使用EF Core基于我们的模型创建数据库时，
+此时这些实体也将在内存优化表中创建一份
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,6 +120,7 @@ namespace MemoryOptimizedTables {
             modelBuilder.Entity<SensorRead> ().HasIndex (r => r.LocalTime);
             modelBuilder.Entity<SensorRead> ().HasIndex (r => r.TimeCode);
             modelBuilder.Entity<SensorRead> ().HasIndex (r => r.StatusCode);
+            //---------------重点---------------------
             modelBuilder.Entity<SensorRead> ().ForSqlServerIsMemoryOptimized ();
         }
     }
