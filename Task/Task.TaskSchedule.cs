@@ -1,0 +1,18 @@
+我们发现任务的执行都要经过Schedule
+task的核心就是这个Schedule
+因为他要把任务安排在线程或者线程池中
+schedule决定任务是否采用线程池中的线程
+
+标记为RunLong的线程是不用线程池中的线程的，用一个单独的线程
+RunLonging... Thread
+
+在.net framework中有两种taskschedule
+1.ThreadPoolTaskScheduler
+2.SynchronizationContextTaskScheduler
+
+
+三：我可以自定义Scheduler吗？？？
+系统中自带了两个：ThreadPoolTaskSchedule和SynchronizationContextTaskSchedule
+我自定义的scheduler，需要将每一个task都委托到一个thread中去执行
+PerThreadTaskScheduler
+通过windbg去查看是否真的使用Thread去执行的
