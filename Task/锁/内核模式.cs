@@ -102,52 +102,7 @@ ReaderWriterLockSlim：
 《2》 使用Wait来代替WaitOne（是WaitHandle祖先类提供了一个方法）
 《3》 支持任务取消
 《4》 看一下Wait方法中的实现逻辑
-<1> 原始的WaitOne函数调用方式
-// System.Threading.WaitHandle
-[SecurityCritical]
-[MethodImpl(MethodImplOptions.InternalCall)]
-private static extern int WaitOneNative(SafeHandle waitableSafeHandle, uint millisecondsTimeout, bool hasThreadAffinity, bool exitContext);
-<2> 新的Wait方式
-        for (int i = 0; i < spinCount; i++)
-        {
-            if (this.IsSet)
-            {
-                return true;
-            }
-            if (i < num2)
-            {
-                if (i == num2 / 2)
-                {
-                    Thread.Yield();
-                }
-                else
-                {
-                    Thread.SpinWait(PlatformHelper.ProcessorCount * (4 << i));
-                }
-            }
-            else
-            {
-                if (i % num4 == 0)
-                {
-                    Thread.Sleep(1);
-                }
-                else
-                {
-                    if (i % num3 == 0)
-                    {
-                        Thread.Sleep(0);
-                    }
-                    else
-                    {
-                        Thread.Yield();
-                    }
-                }
-            }
-            if (i >= 100 && i % 10 == 0)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-            }
-        }
+
 
 其他的方式基本上和原来的内核版本保持一致。。。
 
