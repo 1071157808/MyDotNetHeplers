@@ -14,6 +14,6 @@
                 b += info.Length;
             }
             // 4.
-            // Return total size
+            // Return total size    
             return b.ToString ();
         }
