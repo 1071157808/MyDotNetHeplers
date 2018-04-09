@@ -11,3 +11,4 @@ for (int i = 0; i < res; i++) {
     Console.Write ("+");
 }
 Console.ReadKey ();
+

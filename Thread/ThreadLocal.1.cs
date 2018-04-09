@@ -11,7 +11,7 @@ namespace ThreadLocal {
             local.Value = "hello world!!!";
             var t = new Thread (() => {
                 //这个显示的也为空
-                Console.WriteLine ("当前工作线程:{0}", local.Value);
+                Console.WriteLine ("当前工作线程:{0}", local.Value);  //这里看不见
             });
             t.Start ();
             Console.WriteLine ("主线程:{0}", local.Value);
@@ -19,3 +19,6 @@ namespace ThreadLocal {
         }
     }
 }
+
+//主线程:hello world!!!
+//当前工作线程:
