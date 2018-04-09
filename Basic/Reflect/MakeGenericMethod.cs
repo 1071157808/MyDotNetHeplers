@@ -1,35 +1,30 @@
-
-using System;
-using System.Reflection;
+using System; 
+using System.Reflection; 
 // Define a class with a generic method.
-public class Example
-{
-    public static void Generic<T>(T toDisplay)
-    {
-        Console.WriteLine("\r\nHere it is: {0}", toDisplay);
+public class Example {
+    public static void Generic < T > (T toDisplay) {
+        Console.WriteLine("\r\nHere it is: {0}", toDisplay); 
     }
 }
-public class Test
-{
-    public static void Main()
-    {
-        Console.WriteLine("\r\n--- Examine a generic method.");
+public class Test {
+    public static void Main() {
+        Console.WriteLine("\r\n--- Examine a generic method."); 
         // Create a Type object representing class Example, and
         // get a MethodInfo representing the generic method.
         //
-        Type ex = typeof(Example);
-        MethodInfo mi = ex.GetMethod("Generic");
-        DisplayGenericMethodInfo(mi);
+        Type ex = typeof(Example); 
+        MethodInfo mi = ex.GetMethod("Generic"); 
+        DisplayGenericMethodInfo(mi); 
         // Assign the int type to the type parameter of the Example
         // method.
         //
-        MethodInfo miConstructed = mi.MakeGenericMethod(typeof(int));
-        DisplayGenericMethodInfo(miConstructed);
+        MethodInfo miConstructed = mi.MakeGenericMethod(typeof(int)); 
+        DisplayGenericMethodInfo(miConstructed); 
         // Invoke the method.
-        object[] args = { 42 };
-        miConstructed.Invoke(null, args);
+        object[] args =  {42 }; 
+        miConstructed.Invoke(null, args); 
         // Invoke the method normally.
-        Example.Generic<int>(42);
+        Example.Generic < int > (42); 
         // Get the generic type definition from the closed method,
         // and show it's the same as the original definition.
         //
